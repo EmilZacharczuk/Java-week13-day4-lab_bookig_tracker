@@ -1,13 +1,25 @@
 package com.example.codeclan.Booking.System.models;
 
+
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="customers")
 public class Customer {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
     private String name;
+    @Column
     private String town;
+    @Column
     private int age;
+
+    @OneToMany(mappedBy = "customer")
     private List<Booking> bookings;
 
 
@@ -27,6 +39,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTown() {
@@ -51,6 +71,9 @@ public class Customer {
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
+    }
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
     }
 }
 
