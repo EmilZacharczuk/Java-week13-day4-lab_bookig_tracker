@@ -20,4 +20,10 @@ public class CourseController {
     public List<Course> getAllCoursesByRating (@PathVariable int rating) {
         return coursesRepository.findCoursesByRating(rating);
     }
+
+    @RequestMapping(value="customer/{id}")
+    public List<Course> getCourseByCustomer (@PathVariable Long id) {
+        return  coursesRepository.getCoursesByCustomer(id);
+    }
+
 }

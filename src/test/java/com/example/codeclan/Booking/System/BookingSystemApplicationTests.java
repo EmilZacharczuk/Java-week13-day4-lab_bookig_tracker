@@ -29,7 +29,7 @@ public class BookingSystemApplicationTests {
 	public void before() {
 		course = new Course("Maths", "Edinburgh", 5);
 		customer = new Customer("John", "Fraser", 12);
-		booking = new Booking("11/09/2018",customer,course);
+		booking = new Booking("11-09-2018",customer,course);
 
 	}
 	@Test
@@ -74,7 +74,18 @@ public class BookingSystemApplicationTests {
 
 	@Test
 	public void canFindBookingByDate(){
-		List<Booking> result = bookingsRepository.getBookingsByDate("11/12/2018");
+		List<Booking> result = bookingsRepository.getBookingsByDate("11-12-2018");
 		assertEquals(1,result.size());
+	}
+	@Test
+	public void canFindCustomerByTownByCourse() {
+		List<Customer> result = customerRepository.findCustomerForAGivenCourse(3L,"Aberdeen");
+		assertEquals(1, result.size());
+	}
+
+	@Test
+	public void canFindCustomerAgeGReaterByTownByCourse(){
+		List<Customer> result = customerRepository.findCustomerAgeLimitCourseTown(15,3L,"Aberdeen");
+		assertEquals(1, result.size());
 	}
 }
