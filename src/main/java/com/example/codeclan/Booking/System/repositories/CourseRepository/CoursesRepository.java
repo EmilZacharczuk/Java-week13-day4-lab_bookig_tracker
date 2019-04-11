@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CoursesRepository extends JpaRepository<Course, Long> {
+public interface CoursesRepository extends JpaRepository<Course, Long>, CoursesRepositoryCustom {
 
     List<Course> findCoursesByRating(int rating);
+    List<Course> getCoursesByCustomer(Long customerID);
 }

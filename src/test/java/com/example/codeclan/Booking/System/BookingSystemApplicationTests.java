@@ -3,7 +3,9 @@ package com.example.codeclan.Booking.System;
 import com.example.codeclan.Booking.System.models.Booking;
 import com.example.codeclan.Booking.System.models.Course;
 import com.example.codeclan.Booking.System.models.Customer;
+import com.example.codeclan.Booking.System.repositories.BookingRepository.BookingsRepository;
 import com.example.codeclan.Booking.System.repositories.CourseRepository.CoursesRepository;
+import com.example.codeclan.Booking.System.repositories.CustomerRepository.CustomerRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +40,12 @@ public class BookingSystemApplicationTests {
 
 	CoursesRepository coursesRepository;
 
+	@Autowired
+	CustomerRepository customerRepository;
+
+	@Autowired
+	BookingsRepository bookingsRepository;
+
 	@Test
 	public void customerCanAddBooking() {
 		customer.addBooking(booking);
@@ -53,5 +61,20 @@ public class BookingSystemApplicationTests {
 		List<Course> result = coursesRepository.findCoursesByRating(5);
 		assertEquals(3, result.size());
 	}
+	@Test
+	public void canFindAllCustomersByCourseId() {
+		List<Customer> result = customerRepository.findCustomerByCourseId(2L);
+		assertEquals(2, result.size());
+	}
+	@Test
+	public void canFindAllCoursesByCustomerId() {
+		List<Course> result = coursesRepository.getCoursesByCustomer(3L);
+		assertEquals(2, result.size());
+	}
 
+	@Test
+	public void canFindBookingByDate(){
+		List<Booking> result = bookingsRepository.getBookingsByDate("11/12/2018");
+		assertEquals(1,result.size());
+	}
 }
