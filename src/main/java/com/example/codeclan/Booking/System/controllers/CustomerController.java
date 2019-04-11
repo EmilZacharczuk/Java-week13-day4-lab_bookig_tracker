@@ -19,4 +19,14 @@ public class CustomerController {
     public List<Customer> getAllCustomerByCourseId(@PathVariable Long id) {
         return customerRepository.findCustomerByCourseId(id);
     }
+
+    @RequestMapping(value="/course/{id}/town/{town}")
+    public List<Customer> getCustomerByCourseByTown(@PathVariable Long id,@PathVariable String town ){
+        return customerRepository.findCustomerForAGivenCourse(id,town);
+    }
+
+    @RequestMapping(value = "/age/{age}/town/{town}/course/{course_id}")
+    public List<Customer> getCustomerByAgeByTownByCourse(@PathVariable int age, @PathVariable String town, @PathVariable Long course_id) {
+        return customerRepository.findCustomerAgeLimitCourseTown(age, course_id, town);
+    }
 }
